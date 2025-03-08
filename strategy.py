@@ -36,7 +36,7 @@ def strategy(
         return (x - np.mean(x)) / (np.std(x) + 1e-6)
 
     if len(fundamental) == len(momentum):
-        alpha = (0.45 * standardize(momentum) * market_trend +
+        alpha = (0.55 * standardize(momentum) * market_trend +
                  0.15 * standardize(fundamental) +
                  0.40 * standardize(vol_factor))
     else:
@@ -44,7 +44,7 @@ def strategy(
 
     alpha[~investable_mask] = -np.inf
 
-    top_k = min(40, N)
+    top_k = min(50, N)
     selected = np.argsort(-alpha)[:top_k]
     weights = np.zeros(N)
     weights[selected] = 1.0 / top_k

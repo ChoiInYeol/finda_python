@@ -42,11 +42,5 @@ def strategy(
     else:
         alpha = standardize(momentum) * market_trend
 
-    alpha[~investable_mask] = -np.inf
-
-    top_k = min(40, N)
-    selected = np.argsort(-alpha)[:top_k]
-    weights = np.zeros(N)
-    weights[selected] = 1.0 / top_k
-
-    return weights
+    alpha[~investable_mask] = -n
+    
